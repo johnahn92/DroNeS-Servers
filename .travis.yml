@@ -4,4 +4,5 @@ python:
  - "3.6"
 cache: pip
 script:
+ - flake8 --statistics --show-source --disable-noqa
  - python -m unittest -v tests.MockPathfinderTest 
