@@ -7,4 +7,4 @@ install:
  - pip install flake8
 script:
  - flake8 --statistics --show-source --disable-noqa
- - python -m unittest -v tests.MockPathfinderTest 
+ - python3 -m unittest discover -s tests -v
