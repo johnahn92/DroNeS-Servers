@@ -17,7 +17,9 @@ Since cost functions are not meant to run asynchronously, the responsibility of
 "timekeeping" will be done by whoever initialises the job.
 
 Each cost function should imeplement an `getReward(elapsed_time)` method which
-returns the reward of the job if completed at <elapsed_time> seconds.
+returns the reward of the job if completed at <elapsed_time> seconds; and also
+a self.type attribute to indicate to the server what cost function to use to
+update the rewards on the metrics UI
 '''
 
 
