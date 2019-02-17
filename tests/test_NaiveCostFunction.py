@@ -1,5 +1,5 @@
 import unittest
-from Scheduling.JobGenerator.CostFunction import NaiveCostFunction
+from Scheduling.CostFunction import NaiveCostFunction
 
 
 class NaiveCostFunctionTest(unittest.TestCase):
