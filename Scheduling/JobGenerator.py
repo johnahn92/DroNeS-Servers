@@ -55,10 +55,6 @@ class PoissonGenerator(JobGenerator):
         super().__init__(origin, range, queue)
         self.n = n
 
-    def start(self):
-        t = Thread(target=self.add_to_queue)
-        t.start()
-
     def add_to_queue(self):
         while self.running:
             sleep_time = - math.log(random.uniform(0, 1)) / self.n
