@@ -61,5 +61,5 @@ class PoissonGenerator(JobGenerator):
             job = self.factory.generateJob()
             self.queue.put(job)
             sleep_time = - math.log(random.uniform(0, 1)) / \
-                         self.args.generator_params
+                self.args.generator_params
             time.sleep(sleep_time)
