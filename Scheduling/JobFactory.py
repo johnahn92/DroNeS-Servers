@@ -10,7 +10,7 @@ Helper functions to generate random (lat, lon)s within a radius of another
 '''
 EARTH_RADIUS = 6371  # km
 # 1 degree latitute in meters
-ONE_DEGREE = EARTH_RADIUS * 2 * math.pi / 360 * 1000
+ONE_DEG = EARTH_RADIUS * 2 * math.pi / 360 * 1000
 
 
 def randomPointOnDisk(radius):
@@ -19,10 +19,11 @@ def randomPointOnDisk(radius):
     return (r * math.cos(theta), r * math.sin(theta))
 
 
-def randomCoords(lat, lon, radius):
+def randomCoords(coords, radius):
     dx, dy = randomPointOnDisk(radius)
-    random_lat = lat + (dy / ONE_DEGREE)
-    random_lon = lon + (dx / (ONE_DEGREE * math.cos(lat * math.pi / 180)))
+    random_lat = coords[0] + (dy / ONE_DEG)
+    random_lon = coords[1] + \
+                 (dx / (ONE_DEG * math.cos(coords[0] * math.pi / 180)))
     return (random_lat, random_lon)
 
 
@@ -81,22 +82,9 @@ time when `generateJob()` was called.
 
 
 class JobFactory:
-    def __init__(self, origin, range):
-        self.origin = origin
-        self.range = range
+    def __init__(self, args):
+        self.args = args
         self.counter = 0
-        self.items = []
-        self.getConfig()
-
-    def getConfig(self):
-        config = configparser.ConfigParser()
-        config.read('config.ini')
-        for (item, params) in config['Jobs'].items():
-            entry = {'item': item,
-                     'reward': eval(params)[0],
-                     'penalty': eval(params)[1],
-                     'valid_for': eval(params)[2]}
-            self.items.append(entry)
 
     def generateJob(self):
         # Job creation
@@ -112,14 +100,13 @@ class JobFactory:
         valid_for = random.randint(item['valid_for'][0], item['valid_for'][1])
         job.cost_function = NaiveCostFunction(reward, penalty, valid_for)
         # Assigning pick_up and destination
-        job.pick_up = randomCoords(self.origin[0], self.origin[1], self.range)
-        job.destination = randomCoords(self.origin[0], self.origin[1],
-                                       self.range)
+        job.pick_up = randomCoords(self.args.origin, self.args.radius)
+        job.destination = randomCoords(self.args.origin, self.args.radius)
         return job.__dict__
 
     # Ignores the given probability of the job, and picks one at random
     def getRandomItem(self):
-        return random.choice(self.items)
+        return random.choice(self.args.items)
 
     def generateUID(self):
         self.counter += 1

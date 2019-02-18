@@ -28,15 +28,16 @@ continue running until `.stop()` is called.
 # should implement their own checks against the self.running attribute to start
 # and stop the thread
 class JobGenerator(ABC):
-    def __init__(self, origin, range, queue):
-        self.factory = JobFactory(origin, range)
+    def __init__(self, args, queue):
+        self.factory = JobFactory(args)
         self.running = False
         self.queue = queue
 
     def start(self):
-        self.running = True
-        self.t = Thread(target=self.add_to_queue)
-        self.t.start()
+        if not self.running:
+            self.running = True
+            self.t = Thread(target=self.add_to_queue)
+            self.t.start()
 
     def stop(self):
         self.running = False
@@ -51,13 +52,14 @@ class JobGenerator(ABC):
 # distribution.
 # This should be 1/N where N is the average number of occurances per second
 class PoissonGenerator(JobGenerator):
-    def __init__(self, origin, range, queue, n):
-        super().__init__(origin, range, queue)
-        self.n = n
+    def __init__(self, args, queue):
+        self.args = args
+        super().__init__(args, queue)
 
     def add_to_queue(self):
         while self.running:
-            sleep_time = - math.log(random.uniform(0, 1)) / self.n
-            time.sleep(sleep_time)
             job = self.factory.generateJob()
             self.queue.put(job)
+            sleep_time = - math.log(random.uniform(0, 1)) / \
+                           self.args.generator_params
+            time.sleep(sleep_time)
