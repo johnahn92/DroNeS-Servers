@@ -1,4 +1,5 @@
 import configparser
+import os
 
 
 class Args:
@@ -12,7 +13,8 @@ class Args:
 def getArgs():
     args = Args()
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    file = os.path.join(os.path.dirname(__file__), 'config.ini')
+    config.read(file)
 
     for (item, params) in config['Jobs'].items():
         entry = {'item': item,
