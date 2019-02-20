@@ -105,7 +105,7 @@ class JobFactory:
 
     # Ignores the given probability of the job, and picks one at random
     def getRandomItem(self):
-        return random.choice(self.args.items)
+        return random.choice(self.args.job_items)
 
     def generateUID(self):
         self.counter += 1
