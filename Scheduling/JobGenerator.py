@@ -11,12 +11,9 @@ asynchronously) generate jobs that are to be scheduled by the scheduler.
 
 JobGenerators will receive:
 
-origin - A (lat, lon) coordinate that corresponds to a drone dispatch depot
-range - An area described by a radius of <range> meters where
-        the jobs (both pick-up and destination) will be limited to.
-queue - A Queue.Queue object where the jobs generated will be queued in a FIFO.
-        This queue can be later popped and sorted in an external array before
-        being sent to the simulation server
+queue - A Queue.Queue object sent from the scheduler where the jobs generated
+        will be queued in a FIFO. This queue can be later popped and sorted in
+        an external array before being sent to the simulation server
 
 The JobGenerator object can be started using the `.start()` method, and will
 continue running until `.stop()` is called.
@@ -29,6 +26,7 @@ continue running until `.stop()` is called.
 # and stop the thread
 class JobGenerator(ABC):
     def __init__(self, args, queue):
+        self.args = args
         self.factory = JobFactory(args)
         self.running = False
         self.queue = queue
@@ -53,7 +51,6 @@ class JobGenerator(ABC):
 # This should be 1/N where N is the average number of occurances per second
 class PoissonGenerator(JobGenerator):
     def __init__(self, args, queue):
-        self.args = args
         super().__init__(args, queue)
 
     def add_to_queue(self):
