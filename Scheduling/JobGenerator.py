@@ -3,7 +3,7 @@ import random
 import time
 from abc import ABC, abstractmethod
 from threading import Thread
-from JobFactory import JobFactory
+from .JobFactory import JobFactory
 
 '''
 A JobGenerator leverages on the JobFactory class to autonomously (and

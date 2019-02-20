@@ -1,7 +1,7 @@
 import math
 import random
 import time
-from CostFunction import NaiveCostFunction
+from .CostFunction import NaiveCostFunction
 
 '''
 Helper functions to generate random (lat, lon)s within a radius of another
@@ -15,7 +15,7 @@ ONE_DEG = EARTH_RADIUS * 2 * math.pi / 360 * 1000
 def randomPointOnDisk(radius):
     r = radius * random.uniform(0, 1)
     theta = random.uniform(0, 1) * 2 * math.pi
-    return (r * math.cos(theta), r * math.sin(theta))
+    return [r * math.cos(theta), r * math.sin(theta)]
 
 
 def randomCoords(coords, radius):
@@ -23,7 +23,7 @@ def randomCoords(coords, radius):
     random_lat = coords[0] + (dy / ONE_DEG)
     random_lon = coords[1] + \
         (dx / (ONE_DEG * math.cos(coords[0] * math.pi / 180)))
-    return (random_lat, random_lon)
+    return [random_lat, random_lon]
 
 
 '''
