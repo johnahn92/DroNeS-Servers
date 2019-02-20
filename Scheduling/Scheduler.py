@@ -10,9 +10,9 @@ It creates an instance of a JobGenerator class, and priotises the incoming
 jobs as defined by the Scheduler implementation whenever a request for a job
 is made.
 
-* Attention has to be made to ensure that the jobs are scheduled in a timely and
-sensical manner such that it is able to process the jobs quicker than they are
-generated.
+* Attention has to be made to ensure that the jobs are scheduled in a timely
+and sensical manner such that it is able to process the jobs quicker than they
+are generated.
 
 Methods:
   .start() - Starts the JobGenerator component
