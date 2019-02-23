@@ -6,8 +6,7 @@
   "properties": {
     "content": {
       "description": "Content of the job" ,
-      "type": "string",
-      "default": "mock_item"
+      "type": "string"
     },
     "cost_function": {
       "description": "List of cost function attributes",
@@ -15,23 +14,19 @@
       "properties": {
         "penalty": {
           "description": "Penalty if job not completed",
-          "type": "integer",
-          "default": 0
+          "type": "integer"
         },
         "reward": {
           "description": "Reward at a given time",
-          "type": "integer",
-          "default": 0
+          "type": "integer"
         },
         "type": {
           "description": "Type of cost function used",
-          "type": "string",
-          "default": "naive"
+          "type": "string"
         },
         "valid_time": {
           "description": "The time the goods have to be delivered by",
-          "type": "integer",
-          "default": 0
+          "type": "integer"
         }
       },
       "required": ["penalty", "reward", "type", "valid_time"]
