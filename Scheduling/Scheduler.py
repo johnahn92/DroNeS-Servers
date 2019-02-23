@@ -1,6 +1,7 @@
 import queue
 from abc import ABC, abstractmethod
 from .JobGenerator import PoissonGenerator
+from .Utils import Encoder
 
 '''
 A JobScheduler is the final component of scheduling and that serves as the
@@ -55,11 +56,9 @@ class FCFSScheduler(JobScheduler):
         self.__processQueue(data)
         if (len(self.sortedQueue) > 0):
             job = self.sortedQueue.pop(0)
-            # we serialise the cost function object before sending it off
-            job['cost_function'] = job['cost_function'].__dict__
         else:
             job = {}
-        return job
+        return json.dumps(job, cls=Encoder)
 
     def __processQueue(self, data):
         for i in range(self.jobQueue.qsize()):
