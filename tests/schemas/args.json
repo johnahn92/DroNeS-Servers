@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Args Schema",
+  "type": "object",
+
+  "properties": {
+    "job_items": {
+      "description": "List of job_items",
+      "type": "array",
+      "items" : {
+        "item": {
+          "description": "Type of an item",
+          "type": "string"
+        },
+        "reward": {
+          "description": "Range of reward",
+          "type": "array",
+          "items": {
+            "type" : "integer"
+          }
+        },
+        "penalty": {
+          "description": "Range of penalty",
+          "type": "array",
+          "items": {
+            "type" : "integer"
+          }
+        },
+        "valid_for": {
+          "description": "Range of valid time peiod",
+          "type": "array",
+          "items": {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "origin": {
+      "description": "List of origin coordinates" ,
+      "type": "array",
+      "items" :  {
+        "type" : "integer"
+      }
+    },
+    "radius" : {
+      "description": "Radius",
+      "type": "integer"
+    },
+    "generator_params" : {
+      "description": "generator parameters",
+      "type": "integer"
+    }
+  },
+  "required" : ["item", "origin", "radius", "generator_params"]
+}
