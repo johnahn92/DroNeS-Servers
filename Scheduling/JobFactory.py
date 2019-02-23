@@ -88,10 +88,10 @@ class JobFactory:
     def generateJob(self):
         # Job creation
         job = Job()
-        job.uid = self.generateUID()
+        job.uid = self.__generateUID()
         job.creation_time = int(time.time())
         # Assigning item to job
-        item = self.getRandomItem()
+        item = self.__getRandomItem()
         job.content = item['item']
         # Assigning cost function
         reward = random.randint(item['reward'][0], item['reward'][1])
@@ -104,9 +104,9 @@ class JobFactory:
         return job.__dict__
 
     # Ignores the given probability of the job, and picks one at random
-    def getRandomItem(self):
+    def __getRandomItem(self):
         return random.choice(self.args.job_items)
 
-    def generateUID(self):
+    def __generateUID(self):
         self.counter += 1
         return self.counter
