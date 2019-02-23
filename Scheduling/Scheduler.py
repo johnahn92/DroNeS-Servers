@@ -52,7 +52,7 @@ class FCFSScheduler(JobScheduler):
         super().__init__(args)
 
     def getJob(self, data):
-        self.processQueue(data)
+        self.__processQueue(data)
         if (len(self.sortedQueue) > 0):
             job = self.sortedQueue.pop(0)
             # we serialise the cost function object before sending it off
@@ -61,7 +61,7 @@ class FCFSScheduler(JobScheduler):
             job = {}
         return job
 
-    def processQueue(self, data):
+    def __processQueue(self, data):
         for i in range(self.jobQueue.qsize()):
             job = self.jobQueue.get()
             self.sortedQueue.append(job)
