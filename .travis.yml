@@ -5,6 +5,7 @@ python:
 cache: pip
 install:
  - pip install flake8
+ - pip3 install -r requirements.txt
 script:
  - flake8 --statistics --show-source --disable-noqa
  - python3 -m unittest discover -s tests -v
