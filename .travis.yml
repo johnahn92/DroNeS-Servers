@@ -9,7 +9,7 @@ install:
  - pip3 install -r requirements.txt
 script:
  - flake8 --statistics --show-source --disable-noqa
- - python3 -m coverage run --branch --source=. --rcfile=.coveragerc -m \
+ - python3 -m coverage run --branch --source=. --rcfile=.coveragerc -m
    unittest discover -s tests -v
 after_success:
  - python3 -m coverage report -m
