@@ -1,6 +1,5 @@
 import json
 import os
-import queue
 import unittest
 from jsonschema import validate
 from Scheduling.Scheduler import FCFSScheduler
