@@ -3,11 +3,11 @@ import os
 import queue
 import unittest
 from jsonschema import validate
-from Scheduling.Scheduler import JobScheduler, FCFSScheduler
+from Scheduling.Scheduler import FCFSScheduler
 from MockSimulation.MockSimulation import Simulation
 
-# Mock Args object creator.
-class Args:
+
+class mockArgs:
     def __init__(self):
         self.job_items = [
             {
@@ -31,8 +31,8 @@ def load_schema(filename):
 
 class SchedulerTest(unittest.TestCase):
     def setUp(self):
-        self.args = Args()
-        self.scheduler = FCFSScheduler(self.args)
+        self.mockArgs = mockArgs()
+        self.scheduler = FCFSScheduler(self.mockArgs)
         self.mockdata = Simulation().getGeneric()
 
     def testStartandStop(self):

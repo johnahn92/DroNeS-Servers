@@ -3,10 +3,10 @@ import os
 import queue
 import unittest
 from jsonschema import validate
-from Scheduling.JobGenerator import JobGenerator, PoissonGenerator
+from Scheduling.JobGenerator import PoissonGenerator
 
-# Mock Args object creator.
-class Args:
+
+class mockArgs:
     def __init__(self):
         self.job_items = [
             {
@@ -30,10 +30,10 @@ def load_schema(filename):
 
 class JobGeneratorTest(unittest.TestCase):
     def setUp(self):
-        self.args = Args()
+        self.mockArgs = mockArgs()
         self.running = False
         self.queue = queue.Queue()
-        self.generator = PoissonGenerator(self.args, self.queue)
+        self.generator = PoissonGenerator(self.mockArgs, self.queue)
 
     def testStartandStop(self):
         self.assertFalse(self.generator.running)
