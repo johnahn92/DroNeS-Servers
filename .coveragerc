@@ -1,0 +1,8 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    @abstract
+    unittest.main()
+
+omit =
+    *__init__.py

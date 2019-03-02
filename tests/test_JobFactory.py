@@ -5,7 +5,7 @@ from jsonschema import validate
 from Scheduling.JobFactory import JobFactory
 
 
-class Args:
+class mockArgs:
     def __init__(self):
         self.job_items = [
             {
@@ -28,15 +28,14 @@ def load_schema(filename):
 
 class JobFactoryTest(unittest.TestCase):
     def setUp(self):
-        self.args = Args()
+        self.args = mockArgs()
         self.factory = JobFactory(self.args)
-        print(self.factory.args)
 
     def testGenerateJob(self):
         job = self.factory.generateJob()
         self.assertTrue(job is not None)
 
-    def testSchema(self):
+    def testJobSchema(self):
         schema = load_schema("job.json")
         job = self.factory.generateJob()
         # we'll serialise the cost function before validating

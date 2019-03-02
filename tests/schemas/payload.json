@@ -1,0 +1,19 @@
+{
+   "$schema":"http://json-schema.org/draft-04/schema#",
+   "title":"Payload Schema",
+   "type":"object",
+   "properties":{
+      "drone_routes":{
+         "description":"List of coordinates of delivery points for the drone",
+         "type":"array"
+      },
+      "timestamp":{
+         "description":"Timestamp when the payload was created",
+         "type":"integer"
+      }
+   },
+   "required":[
+      "drone_routes",
+      "timestamp"
+   ]
+}
